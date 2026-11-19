@@ -1,0 +1,39 @@
+# UI
+streamlit==1.63.0
+streamlit-image-coordinates>=0.1.9  # drag-to-measure scale bar, click-to-point reference selection
+streamlit-drawable-canvas==0.13.0  # M5 mask paint/erase editing
+# 0.9.3 is broken on streamlit>=1.4x (calls removed streamlit.elements.image.image_to_url);
+# 0.13.0 fixes it -- verified via AppTest, don't downgrade without re-testing.
+
+# core ML
+# torchvision must match torch's minor version exactly (its own pip metadata
+# enforces this) -- when bumping torch, bump torchvision to the paired
+# version in the same step. Verified on Apple Silicon (MPS) with 2.14.0/0.29.0.
+torch==2.14.0
+torchvision==0.29.0
+segment-anything==1.0
+
+# image processing / measurement
+# numpy is kept <2 because opencv-python-headless 5.x requires numpy>=2 and
+# has no prebuilt wheel for this platform (it falls back to a slow
+# from-source CMake build). Bumping either needs that build story re-tested.
+opencv-python-headless==4.10.0.84
+scikit-image>=0.22
+scipy>=1.11  # binary_fill_holes (SamSegmenter post-processing), linear_sum_assignment (eval scripts)
+numpy<2
+pandas>=2.2
+
+# viz
+matplotlib>=3.8
+plotly>=5.20
+
+# dataset preparation scripts (scripts/prepare_*.py)
+tifffile>=2024.1  # NIST_AM_Pores 3D tiff volumes
+pytesseract>=0.3  # OCR the burned-in "Pixel Size" banner on NIST_CalibrationParticles SEM images
+                   # requires the tesseract binary installed separately (e.g. `brew install tesseract`)
+
+# report export
+python-docx>=1.1
+kaleido>=0.2  # renders plotly figures to PNG for the docx report. kaleido 1.x drives a real Chrome/Chromium;
+              # without one core/report.py falls back to a matplotlib redraw of each histogram (same data, plainer look)
+Pillow>=10.2

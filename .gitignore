@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# IDE / local agent configuration
+.idea/
+.vscode/
+.claude/
+.streamlit/secrets.toml
+
+# OS
+.DS_Store
+
+# Model checkpoints and training caches
+models/*.pth
+models/*.pt
+models/*.safetensors
+models/*.ckpt
+data/datasets/*
+!data/datasets/.gitkeep
+!data/datasets/SOURCES.md
+
+# Runtime and build outputs
+data/outputs/*
+!data/outputs/.gitkeep
+dist/
+build/
+*.zip
+
+# Internal/non-redistributable demo material
+data/demo_images/internal_only_BAM_TiO2/
+
+# Office working files
+*.docx
+~$*
